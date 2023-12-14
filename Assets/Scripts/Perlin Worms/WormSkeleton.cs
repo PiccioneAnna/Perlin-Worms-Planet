@@ -17,7 +17,7 @@ public class WormSkeleton
     public Vector3 tailBone;
     public Vector3 convergancePoint; // point where worm heads towards, set to center of sphere, should be other side of mesh
     public bool isFinished; // is finished generating
-    public float weight = 0.6f;
+    public float weight = 0.8f;
     public float distanceMargin = 3f;
     public WormSettings settings;
 
@@ -49,12 +49,12 @@ public class WormSkeleton
             if(type <= .6)
             {
                 currentPosition = Move();
-                UnityEngine.Debug.Log("Normal move");
+                //UnityEngine.Debug.Log("Normal move");
             }
             else
             {
                 currentPosition = MoveTowardsConvergencePoint();
-                UnityEngine.Debug.Log("Towards Convergence move");
+                //UnityEngine.Debug.Log("Towards Convergence move");
             }
 
             bones.Add(currentPosition);
