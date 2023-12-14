@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SimpleNoiseFilter : INoiseFilter
 {
-
     NoiseSettings.SimpleNoiseSettings settings;
     Noise noise = new Noise();
 

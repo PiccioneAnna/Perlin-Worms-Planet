@@ -11,11 +11,16 @@ public class KingWorm : MonoBehaviour
     public List<Worm> worms;
     KingWorm instance;
 
+    [SerializeField] public Worm wormTest;
+
     // Start is called before the first frame update
     void Start()
     {
         worms = new List<Worm>();
         instance = this;
+
+        wormTest = new Worm(new WormSettings(), new Vector3(213.237f,170.23f,123.20f));
+        wormTest.wSkeleton.CalculateWormPath();
     }
 
     // Update is called once per frame
@@ -32,7 +37,15 @@ public class KingWorm : MonoBehaviour
 
     }
 
+    void OnDrawGizmosSelected()
+    {
+        if (wormTest == null) { return; }
 
+        Vector3[] points = wormTest.wSkeleton.bones.ToArray();
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLineList(points);
+    }
 
 
 
