@@ -30,7 +30,7 @@ public class WormSettings
     {
         _lateralSpeed = 2.5f;
         _twistiness = 3.5f;
-        _radius = 10f;
+        _radius = 50f;
         _segmentLength = 5f;
         _speed = 1.0f;
         _subdivision = 4;

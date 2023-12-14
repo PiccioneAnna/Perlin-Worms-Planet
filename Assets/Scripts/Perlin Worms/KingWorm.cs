@@ -9,6 +9,7 @@ public class KingWorm : MonoBehaviour
 {
     [SerializeField]
     public List<Worm> worms;
+    public MeshFilter meshFilter;
     KingWorm instance;
 
     [SerializeField] public Worm wormTest;
@@ -16,6 +17,8 @@ public class KingWorm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        meshFilter = gameObject.GetComponent<MeshFilter>();
+        
         worms = new List<Worm>();
         instance = this;
 
@@ -23,6 +26,8 @@ public class KingWorm : MonoBehaviour
         wormTest.wSkeleton.CalculateWormPath();
         wormTest.SetBody();
         wormTest.wBody.CreateWormBody();
+
+        meshFilter.mesh = wormTest.wBody.GetMesh();
     }
 
     // Update is called once per frame

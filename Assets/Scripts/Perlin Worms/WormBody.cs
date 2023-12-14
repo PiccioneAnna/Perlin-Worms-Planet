@@ -65,7 +65,7 @@ public class WormBody
             if (i+1 < disks.Count)
             {
                 DrawFace(disks[i], disks[i + 1]);
-                UnityEngine.Debug.Log("Face Created");
+                //UnityEngine.Debug.Log("Face Created");
             }
         }
 
@@ -81,13 +81,21 @@ public class WormBody
         {
             if(i+1 >= subdivisions)
             {
+                DrawTriangle(b.joints[0], b.joints[i], a.joints[i]);
+                DrawTriangle(a.joints[0], b.joints[0], a.joints[i]);
+
+                // Same rules as below
                 DrawTriangle(a.joints[i], b.joints[i], b.joints[0]);
-                DrawTriangle(a.joints[i], a.joints[0], b.joints[0]);
+                DrawTriangle(a.joints[i], b.joints[0], a.joints[0]);
             }
             else
             {
+                DrawTriangle(b.joints[i + 1], b.joints[i], a.joints[i]);
+                DrawTriangle(a.joints[i + 1], b.joints[i + 1], a.joints[i]);
+
+                // Render outside - clockwise for inside render above
                 DrawTriangle(a.joints[i], b.joints[i], b.joints[i + 1]);
-                DrawTriangle(a.joints[i], a.joints[i + 1], b.joints[i + 1]);
+                DrawTriangle(a.joints[i], b.joints[i + 1], a.joints[i + 1]);
             }
 
             UnityEngine.Debug.Log("Face drawn");
@@ -96,9 +104,8 @@ public class WormBody
 
     public void DrawTriangle(Vector3 a, Vector3 b, Vector3 c)
     {
-
-        vArray.Add(a);
         vArray.Add(b);
+        vArray.Add(a);
         vArray.Add(c);
 
         tArray.Add(index);
@@ -116,14 +123,14 @@ public class WormBody
     {
         float radius = settings._radius;
         currDisk = new WormDisk(bone);
-        currDisk.j1 = new Vector3(0, radius, 0);
-        currDisk.j2 = new Vector3(radius, radius, 0);
-        currDisk.j3 = new Vector3(radius, 0, 0);
-        currDisk.j4 = new Vector3(radius, -radius, 0);
-        currDisk.j5 = new Vector3(0, -radius, 0);
-        currDisk.j6 = new Vector3(-radius, -radius, 0);
-        currDisk.j7 = new Vector3(-radius, 0, 0);
-        currDisk.j8 = new Vector3(-radius, radius, 0);
+        currDisk.j1 = bone + new Vector3(0, radius, 0);
+        currDisk.j2 = bone + new Vector3(radius, radius, 0);
+        currDisk.j3 = bone + new Vector3(radius, 0, 0);
+        currDisk.j4 = bone + new Vector3(radius, -radius, 0);
+        currDisk.j5 = bone + new Vector3(0, -radius, 0);
+        currDisk.j6 = bone + new Vector3(-radius, -radius, 0);
+        currDisk.j7 = bone + new Vector3(-radius, 0, 0);
+        currDisk.j8 = bone + new Vector3(-radius, radius, 0);
 
         currDisk.joints.Add(currDisk.j1);
         currDisk.joints.Add(currDisk.j2);
@@ -135,5 +142,10 @@ public class WormBody
         currDisk.joints.Add(currDisk.j8);
 
         disks.Add(currDisk);
+    }
+
+    public Mesh GetMesh()
+    {
+        return wormMesh;
     }
 }
