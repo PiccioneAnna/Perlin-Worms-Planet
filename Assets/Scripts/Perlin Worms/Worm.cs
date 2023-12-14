@@ -22,8 +22,9 @@ public class Worm
         wSkeleton.filter = new WormNoiseFilter(settings);
     }
 
-    public void SetBody()
+    public void SetBody(Color inner, Color outter)
     {
         wBody = new(wSkeleton, wSettings);
+        wBody.SetColors(inner, outter);
     }
 }

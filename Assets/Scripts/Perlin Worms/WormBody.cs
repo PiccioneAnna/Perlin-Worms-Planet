@@ -31,6 +31,10 @@ public class WormBody
     private Mesh wormMesh;
     private List<WormDisk> disks;
     private WormDisk currDisk;
+
+    public Color innerColor;
+    public Color outerColor;
+
     public int index = 0;
     public int subdivisions = 8; // how many points are generated around a point
 
@@ -147,5 +151,11 @@ public class WormBody
     public Mesh GetMesh()
     {
         return wormMesh;
+    }
+
+    public void SetColors(Color i, Color o)
+    {
+        innerColor = i;
+        outerColor = o;
     }
 }

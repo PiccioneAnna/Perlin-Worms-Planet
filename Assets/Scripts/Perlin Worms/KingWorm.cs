@@ -10,6 +10,11 @@ public class KingWorm : MonoBehaviour
     [SerializeField]
     public List<Worm> worms;
     public MeshFilter meshFilter;
+
+    public Material material;
+    public Color outterWormColor;
+    public Color innerWormColor;
+
     KingWorm instance;
 
     [SerializeField] public Worm wormTest;
@@ -17,14 +22,17 @@ public class KingWorm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponent<MeshRenderer>().sharedMaterial = material;
+        gameObject.GetComponent<MeshRenderer>().sharedMaterial.color = innerWormColor;
+        gameObject.AddComponent<MeshFilter>();
         meshFilter = gameObject.GetComponent<MeshFilter>();
-        
+
         worms = new List<Worm>();
         instance = this;
 
         wormTest = new Worm(new WormSettings(), new Vector3(213.237f,170.23f,123.20f));
         wormTest.wSkeleton.CalculateWormPath();
-        wormTest.SetBody();
+        wormTest.SetBody(innerWormColor, outterWormColor);
         wormTest.wBody.CreateWormBody();
 
         meshFilter.mesh = wormTest.wBody.GetMesh();
