@@ -21,6 +21,8 @@ public class KingWorm : MonoBehaviour
 
         wormTest = new Worm(new WormSettings(), new Vector3(213.237f,170.23f,123.20f));
         wormTest.wSkeleton.CalculateWormPath();
+        wormTest.SetBody();
+        wormTest.wBody.CreateWormBody();
     }
 
     // Update is called once per frame

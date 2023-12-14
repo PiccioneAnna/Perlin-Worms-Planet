@@ -20,6 +20,10 @@ public class Worm
         wSettings = settings;
         wSkeleton.settings = settings;
         wSkeleton.filter = new WormNoiseFilter(settings);
+    }
+
+    public void SetBody()
+    {
         wBody = new(wSkeleton, wSettings);
     }
 }
