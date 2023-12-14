@@ -56,13 +56,15 @@ public class KingWorm : MonoBehaviour
     {
         if (wormTest == null) { return; }
 
-        Vector3[] points = wormTest.wSkeleton.bones.ToArray();
+        List<Vector3> bones = wormTest.wSkeleton.bones;
+
+        if(bones.Count % 2 != 0) { bones.Remove(bones[bones.Count - 1]); }
+
+        Vector3[] points = bones.ToArray();
+
+        if(points.Length % 2 != 0 ) { return; } // returns if not even - shouldn't happen after above check
 
         Gizmos.color = Color.blue;
         Gizmos.DrawLineList(points);
     }
-
-
-
-
 }

@@ -44,9 +44,21 @@ public class WormSkeleton
 
         while (!isFinished)
         {
-            currentPosition = MoveTowardsConvergencePoint();
+            float type = UnityEngine.Random.value;
+
+            if(type <= .6)
+            {
+                currentPosition = Move();
+                UnityEngine.Debug.Log("Normal move");
+            }
+            else
+            {
+                currentPosition = MoveTowardsConvergencePoint();
+                UnityEngine.Debug.Log("Towards Convergence move");
+            }
+
             bones.Add(currentPosition);
-            UnityEngine.Debug.Log(currentPosition);
+            //UnityEngine.Debug.Log(currentPosition);
         }
     }
 
@@ -76,7 +88,7 @@ public class WormSkeleton
     public Vector3 GetPerlinNoiseDirection()
     {
         float noise = filter.Evaluate(currentPosition);
-        float degrees = WormHelper.RangeMap(noise, 0, 1, -90, 90);
+        float degrees = WormHelper.RangeMap(noise, 0, 1, -180, 180);
         currentDirection = (Quaternion.AngleAxis(degrees, Vector3.forward) * currentDirection).normalized;
         return currentDirection;
     }
